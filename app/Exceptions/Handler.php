@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Exceptions;
-
+use Illuminate\Auth\AuthenticationException;
 use Exception;
+use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -49,5 +50,28 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         return parent::render($request, $exception);
+    }
+
+    /**
+     * 重写实现未认证用户跳转至相应登陆页
+     * @param \Illuminate\Http\Request $request
+     * @param AuthenticationException $exception
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+
+
+
+        //return $request->expectsJson()
+        //            ? response()->json(['message' => $exception->getMessage()], 401)
+        //            : redirect()->guest(route('login'));
+        if ($request->expectsJson()) {
+            return response()->json(['message' => $exception->getMessage()], 401);
+        } else {
+            session()->flash("danger","没有权限");
+            return in_array('admin', $exception->guards()) ? redirect()->guest(route('shop.store.index')) : redirect()->guest(route('shop.user.login'));
+        }
     }
 }

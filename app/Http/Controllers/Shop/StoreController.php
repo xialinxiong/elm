@@ -38,7 +38,7 @@ class StoreController extends BaseController
             ]);
             $data=$request->post();
             $file = $request->file("shop_img");
-            $data['shop_img']=$file->store("shop_img","image");
+            $data['shop_img']=$file->store("shop_img");
             $data['is_brand']=$request->has("is_brand")?1:0;
             $data['is_time']=$request->has("is_time")?1:0;
             $data['is_feng']=$request->has("is_feng")?1:0;

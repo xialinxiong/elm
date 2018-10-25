@@ -27,7 +27,7 @@ class CategoryController extends BaseController
 //        dd($data);
         $file = $request->file("img");
 //        dd($file);
-        $data['img']=$file->store("images","image");
+        $data['img']=$file->store("images");
 //        dd($data);
         Category::create($data);
 
@@ -55,7 +55,7 @@ class CategoryController extends BaseController
                 $on->update($data);
             }else{
                 unlink($on->img);
-                $data['img']=$file->store("images","image");
+                $data['img']=$file->store("images");
                $on->update($data);
             }
             //返回

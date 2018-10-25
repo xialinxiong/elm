@@ -58,12 +58,39 @@ class UserController extends BaseController
         return view("shop.user.login");
     }
 
-    public function index(Request $request)
+//注销
+    public function logout()
     {
+        Auth::logout();
+        return redirect()->route("shop.user.login");
+}
+//重置密码
+    public function edit(Request $request)
+    {
+        $id=Auth::id();
+        $user=User::find($id);
+        if($request->isMethod("post")){
+            $data=$this->validate($request,[
+                "password"=>"required|confirmed",
+            ]);
+            $data['password'] = bcrypt($data['password']);
+
+            $user->update($data);
+            //返回
+            session()->flash("success","修改成功");
+            return redirect()->route("shop.store.index");
+        }
+
+
+      return view("shop.user.edit",compact("user"));
 
     }
 
+    public function index()
+    {
 
+        return 123;
+    }
 
 
 }
