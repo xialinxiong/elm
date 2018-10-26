@@ -21,6 +21,18 @@ Route::domain("elm.shop.com")->namespace("Shop")->group(function (){
     Route::any("user/login","UserController@login")->name("shop.user.login");
     Route::get("user/logout","UserController@logout")->name("shop.user.logout");
 
+    //菜单分类
+    Route::get("mc/index","MenuCategoriesController@index")->name("shop.mc.index");
+    Route::any("mc/add","MenuCategoriesController@add")->name("shop.mc.add");
+    Route::any("mc/edit/{id}","MenuCategoriesController@edit")->name("shop.mc.edit");
+    Route::get("mc/del/{id}","MenuCategoriesController@del")->name("shop.mc.del");
+
+    //菜单
+    Route::get("menu/index","MenuController@index")->name("shop.menu.index");
+    Route::any("menu/add","MenuController@add")->name("shop.menu.add");
+    Route::any("menu/edit/{id}","MenuController@edit")->name("shop.menu.edit");
+    Route::get("menu/del/{id}","MenuController@del")->name("shop.menu.del");
+
 });
 
 Route::domain("elm.admin.com")->namespace("Admin")->group(function (){
@@ -38,6 +50,7 @@ Route::domain("elm.admin.com")->namespace("Admin")->group(function (){
     Route::get("user/index","UserController@index")->name("admin.user.index");
     Route::any("user/edit/{id}","UserController@edit")->name("admin.user.edit");
     Route::get("user/del/{id}","UserController@del")->name("admin.user.del");
+    Route::any("user/add/{id}","UserController@add")->name("admin.user.add");
 });
 
 

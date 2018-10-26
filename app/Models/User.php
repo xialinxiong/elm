@@ -9,7 +9,7 @@ class User extends Authenticatable
 {
     public function store()
     {
-        return $this->belongsTo(Store::class,"user_id");
+        return $this->hasOne(Store::class,"user_id");
     }
     protected $fillable=["name","password","email"];
 }
