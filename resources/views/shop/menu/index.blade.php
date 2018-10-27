@@ -1,8 +1,37 @@
 @extends("shop.layouts.main")
 
 @section("content")
-    <a href="{{route("shop.menu.add")}}" class="btn btn-info">添加菜单</a>
-    <table class="table">
+
+
+    <div class="col-md-8">
+        <form class="form-inline pull-right" method="get">
+
+            <div class="form-group">
+                <select name="good_id" class="form-control">
+                    <option value="">请选择分类</option>
+                    @foreach($mc as $mcs)
+                        <option value="{{$mcs->id}}">{{$mcs->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="最低价" size="5" name="minPrice" value="{{request()->get("minPrice")}}">
+            </div>
+            -
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="最高价" size="5" name="maxPrice" value="{{request()->get("maxPrice")}}">
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="请输入名称" name="keyword" value="{{request()->get("keyword")}}">
+            </div>
+
+            <button type="submit" class="btn btn-primary">搜索</button>
+
+        </form>
+        <a href="{{route("shop.menu.add")}}" class="btn btn-info">添加菜单</a>
+        <table class="table">
         <tr>
             <th>id</th>
             <th>名称</th>
@@ -14,7 +43,7 @@
             <th>状态</th>
             <th>操作</th>
         </tr>
-        @foreach($data as $datas)
+        @foreach($goods as $datas)
             <tr>
                 <td>{{$datas->id}}</td>
                 <td>{{$datas->goods_name}}</td>
@@ -32,6 +61,6 @@
         @endforeach
     </table>
 
-    {{--{{$data->appends($url)->links()}}--}}
+    {{$goods->appends($url)->links()}}
 
 @endsection

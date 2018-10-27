@@ -66,25 +66,25 @@ class UserController extends BaseController
 }
 //重置密码
     public function edit(Request $request)
-    {
-        $id=Auth::id();
-        $user=User::find($id);
-        if($request->isMethod("post")){
-            $data=$this->validate($request,[
-                "password"=>"required|confirmed",
-            ]);
-            $data['password'] = bcrypt($data['password']);
+{
+    $id=Auth::id();
+    $user=User::find($id);
+    if($request->isMethod("post")){
+        $data=$this->validate($request,[
+            "password"=>"required|confirmed",
+        ]);
+        $data['password'] = bcrypt($data['password']);
 
-            $user->update($data);
-            //返回
-            session()->flash("success","修改成功");
-            return redirect()->route("shop.store.index");
-        }
-
-
-      return view("shop.user.edit",compact("user"));
-
+        $user->update($data);
+        //返回
+        session()->flash("success","修改成功");
+        return redirect()->route("shop.store.index");
     }
+
+
+    return view("shop.user.edit",compact("user"));
+
+}
 
     public function index()
     {

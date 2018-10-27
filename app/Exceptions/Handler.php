@@ -71,7 +71,7 @@ class Handler extends ExceptionHandler
             return response()->json(['message' => $exception->getMessage()], 401);
         } else {
             session()->flash("danger","没有权限");
-            return in_array('admin', $exception->guards()) ? redirect()->guest(route('shop.store.index')) : redirect()->guest(route('shop.user.login'));
+            return in_array('admin', $exception->guards()) ? redirect()->guest(route('admin.admin.login')) : redirect()->guest(route('shop.user.login'));
         }
     }
 }

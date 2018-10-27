@@ -36,20 +36,20 @@
 
             <ul class="nav navbar-nav navbar-right">
 
-                @auth
+                @auth("admin")
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">欢迎:{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">编辑</a></li>
+                            <li><a href="{{route("admin.admin.edit")}}">修改密码</a></li>
 
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">注销</a></li>
+                            <li><a href="{{route("admin.admin.logout")}}">注销</a></li>
                         </ul>
                     </li>
                 @endauth
 
-                @guest
-                    <li><a href="#">登录</a></li>
+                @guest("admin")
+                    <li><a href="{{route("admin.admin.login")}}">登录</a></li>
                 @endguest
 
             </ul>

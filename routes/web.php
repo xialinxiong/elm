@@ -36,6 +36,10 @@ Route::domain("elm.shop.com")->namespace("Shop")->group(function (){
 });
 
 Route::domain("elm.admin.com")->namespace("Admin")->group(function (){
+    //登陆
+    Route::any("admin/login","AdminController@login")->name("admin.admin.login");
+    Route::any("admin/edit","AdminController@edit")->name("admin.admin.edit");
+    Route::get("admin/logout","AdminController@logout")->name("admin.admin.logout");
 //    分类
     Route::get("category/index","CategoryController@index")->name("admin.category.index");
     Route::any("category/add","CategoryController@add")->name("admin.category.add");
