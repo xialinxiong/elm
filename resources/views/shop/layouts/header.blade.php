@@ -17,6 +17,8 @@
                 <li class="active"><a href="{{route("shop.store.index")}}">首页 <span class="sr-only">(current)</span></a></li>
                 <li class="active"><a href="{{route("shop.mc.index")}}">菜单分类管理 <span class="sr-only">(current)</span></a></li>
                 <li class="active"><a href="{{route("shop.menu.index")}}">菜单管理 <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="{{route("shop.activity.index")}}">活动 <span class="sr-only">(current)</span></a></li>
+
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>

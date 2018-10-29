@@ -14,7 +14,13 @@
             <tr>
                 <td>{{$datas->id}}</td>
                 <td>{{$datas->name}}</td>
-                <td><img src="/{{$datas->img}}" width="100px"></td>
+                <td>
+                    {{--<img src="/{{$datas->img}}" width="100px">--}}
+                    @if($datas->img)
+                        <img src="{{$datas->img}}?x-oss-process=image/resize,m_fill,w_80,h_80">
+                        {{--<img src="{{env("ALIYUN_OSS_URL").$datas->goods_img}}?x-oss-process=image/resize,m_fill,w_80,h_80">--}}
+                    @endif
+                </td>
                 <td>{{$datas->category_img}}</td>
                 <td>
                     <a href="{{route('admin.category.edit',$datas->id)}}" class="btn btn-info">编辑</a>

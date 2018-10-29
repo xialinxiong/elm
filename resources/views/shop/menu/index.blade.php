@@ -51,7 +51,12 @@
                 <td>{{$datas->goods_price}}</td>
                 <td>{{$datas->description}}</td>
                 <td>{{$datas->tips}}</td>
-                <td><img src="/{{$datas->goods_img}}" width="100px"></td>
+                <td>
+                    @if($datas->goods_img)
+                    <img src="{{$datas->goods_img}}?x-oss-process=image/resize,m_fill,w_80,h_80">
+                        {{--<img src="{{env("ALIYUN_OSS_URL").$datas->goods_img}}?x-oss-process=image/resize,m_fill,w_80,h_80">--}}
+                        @endif
+                </td>
                 <td>@if($datas->status==1)上架@else未上架@endif</td>
                 <td>
                     <a href="{{route("shop.menu.edit",$datas->id)}}" class="btn btn-info">编辑</a>

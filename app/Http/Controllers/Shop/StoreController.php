@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class StoreController extends BaseController
 {
@@ -36,9 +37,9 @@ class StoreController extends BaseController
                 "notice"=>"required",
                 "discount"=>"required"
             ]);
-            $data=$request->post();
-            $file = $request->file("shop_img");
-            $data['shop_img']=$file->store("shop_img");
+//            $data=$request->post();
+////            $file = $request->file("shop_img");
+////            $data['shop_img']=$file->store("shop_img");
             $data['is_brand']=$request->has("is_brand")?1:0;
             $data['is_time']=$request->has("is_time")?1:0;
             $data['is_feng']=$request->has("is_feng")?1:0;
@@ -55,5 +56,25 @@ class StoreController extends BaseController
 
         }
      return view("shop.store.add",compact("fl"));
+    }
+
+    //处理上传图片
+    public function upload(Request $request)
+    {
+        //处理上传
+        //dd($request->file("file"));
+        $file=$request->file("file");
+        if ($file){
+            //上传
+            $url=$file->store("menu_cate");
+//             var_dump($url);
+            //得到真实地址  加 http的址
+            $url=Storage::url($url);
+            $data['url']=$url;
+
+            return $data;
+            ///var_dump($url);
+        }
+
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Store;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class StoreController extends BaseController
 {
@@ -31,15 +32,13 @@ class StoreController extends BaseController
                 "discount"=>"required"
             ]);
             $da=$request->post();
-            $file = $request->file("shop_img");
-            if($file==null){
+//            $file = $request->file("shop_img");
+            if($da['shop_img']==null){
                 $da['shop_img']=$data->shop_img;
 //                dd($da);
             }else{
-                unlink($data->shop_img);
-                $da['shop_img']=$file->store("shop_img");
+                Storage::delete($data->shop_img);
             }
-            $da['shop_img']=$file->store("shop_img");
             $da['is_brand']=$request->has("is_brand")?1:0;
             $da['is_time']=$request->has("is_time")?1:0;
             $da['is_feng']=$request->has("is_feng")?1:0;
@@ -62,7 +61,8 @@ class StoreController extends BaseController
     {
         //查询一条
         $store=Store::find($id);
-        unlink($store->shop_img);
+        Storage::delete($store->shop_img);
+//        unlink($store->shop_img);
         $store->delete();
         return redirect()->route("admin.store.index")->with("success","删除成功");
     }
@@ -77,5 +77,23 @@ class StoreController extends BaseController
         return redirect()->route("admin.store.index")->with("success","审核成功");
 }
 
+    //处理上传图片
+    public function upload(Request $request)
+    {
+        //处理上传
+        //dd($request->file("file"));
+        $file=$request->file("file");
+        if ($file){
+            //上传
+            $url=$file->store("menu_cate");
+//             var_dump($url);
+            //得到真实地址  加 http的址
+            $url=Storage::url($url);
+            $data['url']=$url;
 
+            return $data;
+            ///var_dump($url);
+        }
+
+    }
 }

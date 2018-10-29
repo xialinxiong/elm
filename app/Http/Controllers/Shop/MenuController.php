@@ -6,7 +6,9 @@ use App\Models\Menu;
 use App\Models\MenuCategories;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Session\Store;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class MenuController extends BaseController
 {
@@ -61,10 +63,12 @@ public function add(Request $request){
         ]);
         $da=$request->post();
 //           dd($da);
-        $file = $request->file("goods_img");
-        $da['goods_img']=$file->store("images");
+//        $file = $request->file("goods_img");
+//        dd($file);
+//        $da['goods_img']=$file->store("images");
         $da['shop_id']=Auth::id();
-//           dd($da);
+//        dd($da);
+
         Menu::create($da);
         //返回
         return redirect()->route("shop.menu.index")->with("success","添加菜单分类成功");
@@ -93,13 +97,12 @@ public function edit(Request $request,$id){
             "status"=>"required"
         ]);
         $da=$request->post();
-        $file = $request->file("goods_img");
-        if($file==null){
-            $da['goods_img']=$data->goods_img;
+//        dd($da);
+//        $file = $request->file("goods_img");
+        if($da['goods_img']){
+            Storage::delete($data->goods_img);
         }else{
-//                dd($data->goods_img);
-            unlink($data->goods_img);
-            $da['goods_img']=$file->store("images");
+            $da['goods_img']=$data->goods_img;
         }
 
         $da['shop_id']=Auth::id();
@@ -114,15 +117,14 @@ public function edit(Request $request,$id){
     return view("shop.menu.edit",compact("data","da"));
 }
 
-
-//删除
 //删除
 public function del(Request $request,$id)
 {
     //查询一条
     $on=Menu::find($id);
     $img=$on['goods_img'];
-    unlink($img);
+    Storage::delete($img);
+//    unlink($img);
     $on->delete();
     //返回
     session()->flash("success","删除成功");
@@ -130,8 +132,25 @@ public function del(Request $request,$id)
 }
 
 
+//处理上传图片
+    public function upload(Request $request)
+    {
+        //处理上传
+        //dd($request->file("file"));
+        $file=$request->file("file");
+        if ($file){
+            //上传
+            $url=$file->store("menu_cate");
+//             var_dump($url);
+            //得到真实地址  加 http的址
+            $url=Storage::url($url);
+            $data['url']=$url;
 
+            return $data;
+            ///var_dump($url);
+        }
 
+    }
 
 
 }

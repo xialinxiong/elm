@@ -18,6 +18,7 @@
                 <li class="active"><a href="{{route("admin.category.index")}}">分类管理 <span class="sr-only">(current)</span></a></li>
                 <li class="active"><a href="{{route("admin.store.index")}}">店铺管理 <span class="sr-only">(current)</span></a></li>
                 <li class="active"><a href="{{route("admin.user.index")}}">用户管理 <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="{{route("admin.activity.index")}}">活动 <span class="sr-only">(current)</span></a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                     <ul class="dropdown-menu">

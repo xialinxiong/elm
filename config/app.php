@@ -177,6 +177,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+
+        //overtrue
+        Overtrue\LaravelUEditor\UEditorServiceProvider::class,
+
     ],
 
     /*

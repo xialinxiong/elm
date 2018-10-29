@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::domain("elm.shop.com")->namespace("Shop")->group(function (){
+    Route::any("activity/index","ActivityController@index")->name("shop.activity.index");
+
+
     Route::any("user/reg","UserController@reg")->name("shop.user.reg");
     Route::any("user/edit","UserController@edit")->name("shop.user.edit");
     Route::get("user/index","UserController@index")->name("shop.user.index");
@@ -30,6 +33,7 @@ Route::domain("elm.shop.com")->namespace("Shop")->group(function (){
     //菜单
     Route::get("menu/index","MenuController@index")->name("shop.menu.index");
     Route::any("menu/add","MenuController@add")->name("shop.menu.add");
+    Route::any("menu/upload","MenuController@upload")->name("shop.menu.upload");
     Route::any("menu/edit/{id}","MenuController@edit")->name("shop.menu.edit");
     Route::get("menu/del/{id}","MenuController@del")->name("shop.menu.del");
 
@@ -43,6 +47,7 @@ Route::domain("elm.admin.com")->namespace("Admin")->group(function (){
 //    分类
     Route::get("category/index","CategoryController@index")->name("admin.category.index");
     Route::any("category/add","CategoryController@add")->name("admin.category.add");
+    Route::any("category/upload","CategoryController@upload")->name("admin.category.upload");
     Route::any("category/edit/{id}","CategoryController@edit")->name("admin.category.edit");
     Route::get("category/del/{id}","CategoryController@del")->name("admin.category.del");
 //店铺
@@ -55,6 +60,11 @@ Route::domain("elm.admin.com")->namespace("Admin")->group(function (){
     Route::any("user/edit/{id}","UserController@edit")->name("admin.user.edit");
     Route::get("user/del/{id}","UserController@del")->name("admin.user.del");
     Route::any("user/add/{id}","UserController@add")->name("admin.user.add");
+    //活动
+    Route::any("activity/index","ActivityController@index")->name("admin.activity.index");
+    Route::any("activity/add","ActivityController@add")->name("admin.activity.add");
+    Route::any("activity/edit/{id}","ActivityController@edit")->name("admin.activity.edit");
+    Route::get("activity/del/{id}","ActivityController@del")->name("admin.activity.del");
 });
 
 
