@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 Route::domain("elm.shop.com")->namespace("Shop")->group(function (){
     Route::any("activity/index","ActivityController@index")->name("shop.activity.index");

@@ -13,7 +13,6 @@ class ActivityController extends Controller
     {
         //当前时间
         $time = date('Y-m-d H:i:s',time());
-//dd($time);
         $datas = Activity::where("end_time",">",$time)->get();
 //        dd($exercise);
 

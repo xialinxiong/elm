@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::any("store/index","Api\StoreController@index");
+Route::any("store/detail","Api\StoreController@detail");
+Route::any("member/reg","Api\MemberController@reg");
+Route::get("member/sms","Api\MemberController@sms");
+Route::any("member/login","Api\MemberController@login");
+Route::any("member/edit","Api\MemberController@edit");
+Route::any("member/forget","Api\MemberController@forget");

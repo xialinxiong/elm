@@ -11,6 +11,10 @@ class MenuCategories extends Model
     {
         return $this->hasOne(Menu::class,"category_id");
     }
+    public function goodsList()
+    {
+        return $this->hasMany(Menu::class,"category_id");
+    }
 
     protected $fillable=["name","type_accumulation","description","is_selected","store_id"];
 }
