@@ -159,7 +159,11 @@ class MemberController extends Controller
 
 
     }
-
+//用户详情
+    public function detail(Request $request)
+    {
+        return Member::find($request->get('user_id'));
+    }
 
 
 }
