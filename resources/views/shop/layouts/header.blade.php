@@ -18,18 +18,28 @@
                 <li class="active"><a href="{{route("shop.mc.index")}}">菜单分类管理 <span class="sr-only">(current)</span></a></li>
                 <li class="active"><a href="{{route("shop.menu.index")}}">菜单管理 <span class="sr-only">(current)</span></a></li>
                 <li class="active"><a href="{{route("shop.activity.index")}}">活动 <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="{{route("shop.order.index")}}">订单管理 <span class="sr-only">(current)</span></a></li>
 
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">订单量统计<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
+                        <li><a href="{{route("shop.order.day")}}">天数</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
+                        <li><a href="{{route("shop.order.month")}}">月份</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
+                        <li><a href="{{route("shop.order.total")}}">总计</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">菜品销量统计<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{route("shop.order.cday")}}">天数</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="{{route("shop.order.cmonth")}}">月份</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="{{route("shop.order.ctotal")}}">总计</a></li>
                     </ul>
                 </li>
             </ul>

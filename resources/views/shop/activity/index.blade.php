@@ -1,4 +1,4 @@
-@extends("admin.layouts.main")
+@extends("shop.layouts.main")
 @section("title","活动列表")
 @section("content")
 

@@ -36,7 +36,19 @@ Route::domain("elm.shop.com")->namespace("Shop")->group(function (){
     Route::any("menu/upload","MenuController@upload")->name("shop.menu.upload");
     Route::any("menu/edit/{id}","MenuController@edit")->name("shop.menu.edit");
     Route::get("menu/del/{id}","MenuController@del")->name("shop.menu.del");
+    //订单管理
+    Route::get("order/index","OrderController@index")->name("shop.order.index");
+    Route::any("order/cancel/{id}","OrderController@cancel")->name("shop.order.cancel");
+    Route::any("order/hair/{id}/{status}","OrderController@hair")->name("shop.order.hair");
 
+    //订单量
+    Route::any("order/day","OrderController@day")->name("shop.order.day");
+    Route::get("order/month","OrderController@month")->name("shop.order.month");
+    Route::get("order/total","OrderController@total")->name("shop.order.total");
+    //菜品量
+    Route::get("order/cday","OrderController@cday")->name("shop.order.cday");
+    Route::get("order/cmonth","OrderController@cmonth")->name("shop.order.cmonth");
+    Route::get("order/ctotal","OrderController@ctotal")->name("shop.order.ctotal");
 });
 
 Route::domain("elm.admin.com")->namespace("Admin")->group(function (){
@@ -65,6 +77,11 @@ Route::domain("elm.admin.com")->namespace("Admin")->group(function (){
     Route::any("activity/add","ActivityController@add")->name("admin.activity.add");
     Route::any("activity/edit/{id}","ActivityController@edit")->name("admin.activity.edit");
     Route::get("activity/del/{id}","ActivityController@del")->name("admin.activity.del");
+    //会员管理
+    Route::any("member/index","MemberController@index")->name("admin.member.index");
+    Route::get("member/del/{id}","MemberController@del")->name("admin.member.del");
+
+    Route::any("order/index","OrderController@index")->name("admin.order.index");
 });
 
 
