@@ -6,6 +6,7 @@ use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class AdminController extends BaseController
 {
@@ -56,5 +57,64 @@ class AdminController extends BaseController
         return view("admin.admin.edit",compact("user"));
 
     }
+
+    //后台用户首页
+    public function index()
+    {
+        $data=Admin::all();
+        return view("admin.admin.index",compact("data"));
+    }
+//添加
+    public function add(Request $request)
+    {
+        if ($request->isMethod('post')){
+            //接收参数
+            $data = $request->post();
+            $data['password'] = bcrypt($data['password']);
+             //创建用户
+            $admin=Admin::create($data);
+            //给用户添加角色
+            $admin->syncRoles($request->post('role'));
+            //跳转并提示
+            return redirect()->route('admin.admin.index')->with('success', '创建' .$admin->name. "成功");
+        }
+
+
+        //得到所有角色
+        $roles=Role::all();
+        return view('admin.admin.add',compact("roles"));
+    }
+//后台角色修改
+    public function xiu(Request $request,$id)
+    {
+     //得到当前用户数据
+        $admin=Admin::find($id);
+        //得到所有用户
+        $roles=Role::all();
+
+        if ($request->isMethod('post')) {
+            //接收参数
+            $data['name'] = $request->post('name');
+            //修改
+            $admin->update($data);
+            //一次性撤消并添加新的权限
+//            $user->syncPermissions(['edit articles', 'delete articles']);
+            $admin->syncRoles($request->post('role'));
+            return redirect()->route('admin.admin.index')->with('success','修改成功');
+        }
+
+
+        //跳转
+        return view('admin.admin.xiu', compact('admin', 'roles'));
+}
+//删除
+    public function del($id)
+    {
+        $per=Admin::find($id);
+        $per->delete();
+        return redirect()->route('admin.admin.index')->with('success', '删除成功');
+
+  }
+
 
 }

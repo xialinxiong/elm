@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 class MemberController extends BaseController
 {
     //显示
+
     public function index(Request $request)
     {
         $url = $request->query();

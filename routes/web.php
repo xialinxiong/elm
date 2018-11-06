@@ -80,13 +80,29 @@ Route::domain("elm.admin.com")->namespace("Admin")->group(function (){
     //会员管理
     Route::any("member/index","MemberController@index")->name("admin.member.index");
     Route::get("member/del/{id}","MemberController@del")->name("admin.member.del");
-
     Route::any("order/index","OrderController@index")->name("admin.order.index");
+
+    //权限管理
+    Route::any("permission/add","PermissionController@add")->name("admin.permission.add");
+    Route::any("permission/edit/{id}","PermissionController@edit")->name("admin.permission.edit");
+    Route::get("permission/del/{id}","PermissionController@del")->name("admin.permission.del");
+    Route::get("permission/index","PermissionController@index")->name("admin.permission.index");
+
+    //角色管理
+    Route::any("role/add","RoleController@add")->name("admin.role.add");
+    Route::any("role/edit/{id}","RoleController@edit")->name("admin.role.edit");
+    Route::get("role/del/{id}","RoleController@del")->name("admin.role.del");
+    Route::get("role/index","RoleController@index")->name("admin.role.index");
+    //后台用户首页
+    Route::get("admin/index","AdminController@index")->name("admin.admin.index");
+    Route::any("admin/add","AdminController@add")->name("admin.admin.add");
+    Route::any("admin/xiu/{id}","AdminController@xiu")->name("admin.admin.xiu");
+    Route::get("admin/del/{id}","AdminController@del")->name("admin.admin.del");
+
 });
 
 
-Route::domain("elm.shop.com")->namespace("Shop")->group(function (){
-
+    Route::domain("elm.shop.com")->namespace("Shop")->group(function (){
     Route::any("store/add","StoreController@add")->name("shop.store.add");
     Route::get("store/index","StoreController@index")->name("shop.store.index");
 
