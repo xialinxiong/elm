@@ -19,8 +19,7 @@
                 <li class="active"><a href="{{route("shop.menu.index")}}">菜单管理 <span class="sr-only">(current)</span></a></li>
                 <li class="active"><a href="{{route("shop.activity.index")}}">活动 <span class="sr-only">(current)</span></a></li>
                 <li class="active"><a href="{{route("shop.order.index")}}">订单管理 <span class="sr-only">(current)</span></a></li>
-
-
+                <li class="active"><a href="{{route("shop.event.index")}}">抽奖活动<span class="sr-only">(current)</span></a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">订单量统计<span class="caret"></span></a>
                     <ul class="dropdown-menu">

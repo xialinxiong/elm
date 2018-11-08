@@ -8,9 +8,9 @@ class Menu extends Model
 {
     //所属分类
     public function mc()
-    {
-        return $this->belongsTo(MenuCategories::class,"category_id");
-    }
+{
+    return $this->belongsTo(MenuCategories::class,"category_id");
+}
     //所属商家
     public function user(){
         return $this->hasOne(MenuCategories::class,"shop_id");

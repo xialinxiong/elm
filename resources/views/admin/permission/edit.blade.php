@@ -7,14 +7,21 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">权限名称</label>
             <div class="col-sm-10">
-                <input type="text" name="name" class="form-control" value="{{$per->name}}">
+                <select name="name" class="form-control">
+                    @foreach($urls as $url)
+                        <option value="{{$url}}" @if($per->name==$url) selected @endif >{{$url}}</option>
+                    @endforeach
+                </select>
+                {{--<input type="text" name="name" class="form-control" value="{{$per->name}}">--}}
             </div>
         </div>
+
         <div class="form-group">
             <label for="inputPassword3" class="col-sm-2 control-label">权限描述</label>
             <div class="col-sm-10">
                 <input type="text" name="intro" class="form-control" value="{{$per->intro}} ">
             </div>
+
         </div>
 
         <div class="form-group">

@@ -28,7 +28,7 @@
         </tr>
     @foreach($data as $datas)
             <tr>
-                <td>{{$datas->shop_id}}</td>
+                <td>{{$datas->shop->shop_name}}</td>
                 <td>{{$datas->nums}}</td>
                 <td>{{$datas->money}}</td>
             </tr>

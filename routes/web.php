@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('index');
 });
+
+
+
 Route::domain("elm.shop.com")->namespace("Shop")->group(function (){
     Route::any("activity/index","ActivityController@index")->name("shop.activity.index");
 
@@ -49,6 +52,12 @@ Route::domain("elm.shop.com")->namespace("Shop")->group(function (){
     Route::get("order/cday","OrderController@cday")->name("shop.order.cday");
     Route::get("order/cmonth","OrderController@cmonth")->name("shop.order.cmonth");
     Route::get("order/ctotal","OrderController@ctotal")->name("shop.order.ctotal");
+    //抽奖
+    Route::get("event/index","EventUserController@index")->name("shop.event.index");
+    Route::get("event/signup/{id}","EventUserController@signup")->name("shop.event.signup");
+
+
+
 });
 
 Route::domain("elm.admin.com")->namespace("Admin")->group(function (){
@@ -80,6 +89,7 @@ Route::domain("elm.admin.com")->namespace("Admin")->group(function (){
     //会员管理
     Route::any("member/index","MemberController@index")->name("admin.member.index");
     Route::get("member/del/{id}","MemberController@del")->name("admin.member.del");
+    //订单首页
     Route::any("order/index","OrderController@index")->name("admin.order.index");
 
     //权限管理
@@ -98,6 +108,22 @@ Route::domain("elm.admin.com")->namespace("Admin")->group(function (){
     Route::any("admin/add","AdminController@add")->name("admin.admin.add");
     Route::any("admin/xiu/{id}","AdminController@xiu")->name("admin.admin.xiu");
     Route::get("admin/del/{id}","AdminController@del")->name("admin.admin.del");
+//导航条
+    Route::get("nav/index","NavController@index")->name("admin.nav.index");
+    Route::any("nav/add","NavController@add")->name("admin.nav.add");
+
+    //抽奖活动
+    Route::get("event/index","EventController@index")->name("admin.event.index");
+    Route::any("event/add","EventController@add")->name("admin.event.add");
+    Route::any("event/edit/{id}","EventController@edit")->name("admin.event.edit");
+    Route::get("event/del/{id}","EventController@del")->name("admin.event.del");
+    Route::get("event/draw/{id}","EventController@draw")->name("admin.event.draw");
+    //抽奖活动奖品
+    Route::get("eventPrize/index","EventPrizeController@index")->name("admin.prize.index");
+    Route::any("eventPrize/add","EventPrizeController@add")->name("admin.prize.add");
+    Route::any("eventPrize/edit/{id}","EventPrizeController@edit")->name("admin.prize.edit");
+    Route::get("eventPrize/del/{id}","EventPrizeController@del")->name("admin.prize.del");
+
 
 });
 

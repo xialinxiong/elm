@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
 use App\Models\Store;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class StoreController extends BaseController
@@ -73,7 +75,26 @@ class StoreController extends BaseController
 //        dd($id);
         $data->state=1;
 //        dd($data);
-       $data->save();
+        $data->save();
+
+        $user=User::where('id',$data->user_id)->first();
+
+        $shopName=$data->shop_name;
+        $to = $user->email;
+
+        // dd($to);
+        $subject =$shopName. '审核通知';
+
+        Mail::send(
+            'emails.shop',
+            compact("shopName"),
+            function ($message) use($to, $subject) {
+//                dd($message);
+                $message->to($to)->subject($subject);
+            }
+
+        );
+
         return redirect()->route("admin.store.index")->with("success","审核成功");
 }
 

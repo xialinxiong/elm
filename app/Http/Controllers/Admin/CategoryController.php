@@ -18,7 +18,6 @@ class CategoryController extends BaseController
     //添加
     public function add(Request $request){
     if($request->isMethod("post")){
-//        dd(111);
         $this->validate($request,[
                 "name"=>"required",
                 "img"=>"required",

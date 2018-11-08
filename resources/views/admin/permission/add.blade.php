@@ -7,7 +7,11 @@
         <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label">权限路由</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="name" id="inputEmail3" placeholder="Name">
+                <select name="name" class="form-control">
+                    @foreach($urls as $url)
+                        <option value="{{$url}}">{{$url}}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
         <div class="form-group">
