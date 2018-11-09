@@ -7,6 +7,7 @@ use App\Models\EventUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
 
 class EventUserController extends BaseController
 {
@@ -19,24 +20,41 @@ class EventUserController extends BaseController
     //抽奖报名
     public function signup($id)
     {
-      $data['event_id']=$id;
-      $data['user_id']=Auth::user()->id;
+        $eventId=$id;
+        $userId=Auth::user()->id;
+//        $num=Event::where("id",$id)->first()->num;
+//      $data['event_id']=$id;
+//      $data['user_id']=Auth::user()->id;
 //      dd($data);
 //dd(1);
-      $num=Event::where("id",$id)->first()->num;
-//      dd($num);
-      $count=EventUser::where("event_id",$id)->count();
-//        dd($count);
-       if ($num <= $count){
+       //1.取出限制报名人数
+        $num=Redis::get("event_num:".$eventId);
+        //2.取出报名人数
+        $users=Redis::scard("event:".$eventId);
+        if ($users<$num){
+            //3. 把当前报名的人的ID 存到 Redis中  存什么类型 格式 event:3
+            Redis::sadd("event:".$eventId,$userId);
+            return "报名成功";
+        }else{
+            return "报名失败";
+        }
 
-           return redirect()->route('shop.event.index')->with('success','报名人数以满');
 
-       }else{
-           EventUser::create($data);
-           return redirect()->route('shop.event.index')->with('success','报名成功');
-//      dd($data);
-
-       }
+//
+//      $num=Event::where("id",$id)->first()->num;
+////      dd($num);
+//      $count=EventUser::where("event_id",$id)->count();
+////        dd($count);
+//       if ($num <= $count){
+//
+//           return redirect()->route('shop.event.index')->with('success','报名人数以满');
+//
+//       }else{
+//           EventUser::create($data);
+//           return redirect()->route('shop.event.index')->with('success','报名成功');
+////      dd($data);
+//
+//       }
 
 
 

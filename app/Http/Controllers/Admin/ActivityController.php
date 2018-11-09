@@ -77,8 +77,8 @@ class ActivityController extends BaseController
     //修改
     public function edit(Request $request,$id)
     {
-      $data=Activity::find($id);
-      $data->start_time=str_replace(" ","T",$data->start_time);
+        $data=Activity::find($id);
+        $data->start_time=str_replace(" ","T",$data->start_time);
         $data->end_time=str_replace(" ","T",$data->end_time);
         if($request->isMethod("post")){
             $da= $this->validate($request,[
@@ -93,7 +93,7 @@ class ActivityController extends BaseController
             $da['end_time']=str_replace("T"," ",$da['end_time']);
 
 //            dd($da);
-           $data->update($da);
+            $data->update($da);
             return redirect()->intended(route("admin.activity.index"))->with("success","修改成功");
         }
 //dd($data);
