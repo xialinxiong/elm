@@ -130,7 +130,8 @@ Route::domain("elm.admin.com")->namespace("Admin")->group(function (){
 
     Route::domain("elm.shop.com")->namespace("Shop")->group(function (){
     Route::any("store/add","StoreController@add")->name("shop.store.add");
-    Route::get("store/index","StoreController@index")->name("shop.store.index");
+        Route::any("store/upload","StoreController@upload")->name("shop.store.upload");
+        Route::get("store/index","StoreController@index")->name("shop.store.index");
 
 
 });

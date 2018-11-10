@@ -37,7 +37,7 @@ class StoreController extends BaseController
                 "notice"=>"required",
                 "discount"=>"required"
             ]);
-//            $data=$request->post();
+            $data=$request->post();
 ////            $file = $request->file("shop_img");
 ////            $data['shop_img']=$file->store("shop_img");
             $data['is_brand']=$request->has("is_brand")?1:0;
@@ -64,6 +64,7 @@ class StoreController extends BaseController
         //处理上传
         //dd($request->file("file"));
         $file=$request->file("file");
+//        dd($file);
         if ($file){
             //上传
             $url=$file->store("menu_cate");
